@@ -7,10 +7,11 @@ export async function GET() {
 
   try {
     const response = await fetch(
-      `http://www.kopis.or.kr/openApi/restful/pblprfr?service=${apiKey}&stdate=20241006&eddate=20241230&cpage=1&rows=10&shcate=DDDD`
+      `http://www.kopis.or.kr/openApi/restful/pblprfr?service=${apiKey}&stdate=20241006&eddate=20241230&cpage=1&rows=10&shcate=CCCC`
     );
     const textData = await response.text();
     const data = await xml2js.parseStringPromise(textData);
+
     const dbData = data?.dbs?.db || []; // 데이터가 없으면 빈 배열을 반환
     return NextResponse.json(dbData);
   } catch (error) {
