@@ -12,6 +12,7 @@ React기반으로 타입스크립트와 NextJs 프레임워크를 사용하여 �
 mysql를 db로 사용하기 위해 mysql2 라이브러리를 사용했습니다. <br />
 react-calendar 라이브러리로 켈린더에 찜한 공연일자를 표시할 수 있다. <br />
 KOPIS 공연예술통합전상망에서 제공하는 API를 사용하고 있는데 데이터를 XML형식으로 가져오기 때문에 변환을 위한 xml2js 라이브러리 사용. <br />
+Typescript로 개발
 
 ## 문제점
 
