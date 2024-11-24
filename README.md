@@ -14,6 +14,7 @@ react-calendar 라이브러리로 켈린더에 찜한 공연일자를 표시할 
 KOPIS 공연예술통합전상망에서 제공하는 API를 사용하고 있는데 데이터를 XML형식으로 가져오기 때문에 변환을 위한 xml2js 라이브러리 사용. <br />
 Typescript로 개발
 이미지 저장할 사이트는 cloudinary 안될시 firebase
+draft.js 라이브러리를 이용해 텍스트 에디터를 구현합니다.
 
 ## 문제점
 
