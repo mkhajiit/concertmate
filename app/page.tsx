@@ -1,4 +1,5 @@
 'use client';
+import { idModule } from '@/lib/id_module';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -32,6 +33,8 @@ export default function Home() {
           </ul>
         );
       })}
+      {/* 난수 생성기 테스트 */}
+      {idModule()}
     </div>
   );
 }
