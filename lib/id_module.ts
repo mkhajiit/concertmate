@@ -11,5 +11,5 @@ export function idModule() {
   const id = `${year}${month.toString().padStart(2, '0')}${day
     .toString()
     .padStart(2, '0')}${random}`; // padStart(2,'0') 문자열의 길이가 2가 될때까지 앞을 0으로 채운다
-  console.log(id);
+  return id;
 }
