@@ -1,5 +1,6 @@
 'use client';
-import React from 'react';
+
+import { loginUser } from '@/api/api';
 
 interface ILoginSubmitData {
   email: string;
@@ -18,7 +19,7 @@ function Login() {
       password: formData.get('password') as string,
     };
 
-    console.log(data);
+    loginUser(data);
   };
 
   return (

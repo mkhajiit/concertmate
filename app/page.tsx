@@ -33,8 +33,6 @@ export default function Home() {
           </ul>
         );
       })}
-      {/* 난수 생성기 테스트 */}
-      {idModule()}
     </div>
   );
 }
