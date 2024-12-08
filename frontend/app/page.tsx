@@ -1,5 +1,5 @@
 'use client';
-import { idModule } from '@/lib/id_module';
+
 import { useEffect, useState } from 'react';
 
 export default function Home() {

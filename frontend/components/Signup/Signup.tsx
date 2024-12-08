@@ -1,6 +1,7 @@
 'use client';
-import { addUser } from '@/api/api';
+
 import { useForm } from 'react-hook-form';
+import { addUser } from '../../api/api';
 
 export interface IInput {
   email: string;

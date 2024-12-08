@@ -1,6 +1,6 @@
 'use client';
 
-import { loginUser } from '@/api/api';
+import { loginUser } from '../../api/api';
 
 interface ILoginSubmitData {
   email: string;

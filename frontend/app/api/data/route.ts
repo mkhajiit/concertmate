@@ -7,7 +7,7 @@ export async function GET() {
 
   try {
     const response = await fetch(
-      `http://www.kopis.or.kr/openApi/restful/pblprfr?service=${apiKey}&stdate=20241006&eddate=20241230&cpage=1&rows=10&shcate=CCCC`
+      `http://www.kopis.or.kr/openApi/restful/pblprfr?service=${apiKey}&stdate=20250501&eddate=20250530&cpage=1&rows=10&shcate=CCCD`
     );
     const textData = await response.text();
     const data = await xml2js.parseStringPromise(textData);

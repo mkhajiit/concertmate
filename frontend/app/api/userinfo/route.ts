@@ -1,7 +1,7 @@
-import pool from '@/db/db';
-import { idModule } from '@/lib/id_module';
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
+import pool from '@/db/db';
+import { idModule } from '../../../../shared/lib/id_module';
 
 //회원가입 post 요청
 export async function POST(request: Request) {
