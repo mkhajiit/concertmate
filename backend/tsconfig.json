@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist" // 컴파일된 JavaScript 파일이 저장될 위치
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
