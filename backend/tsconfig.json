@@ -9,6 +9,6 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist" // 컴파일된 JavaScript 파일이 저장될 위치
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "**/*.ts"],
   "exclude": ["node_modules"]
 }

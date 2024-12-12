@@ -1,5 +1,5 @@
 // db id에 저장할 id 생성기 만들 난수의 자릿수를 인자로 받는다.
-export function idModule(length: number) {
+export default function idModule(length: number) {
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
