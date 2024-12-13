@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { verifyToken } from '@/api/api';
+import Loading from '@/components/Loading/Loading';
 
 export default function UserInfoPage() {
   const router = useRouter();
@@ -28,7 +29,11 @@ export default function UserInfoPage() {
   }, [router]); // router가 변경될 때마다 실행
 
   if (loading) {
-    return <div>Loading...</div>; // 로딩 중에는 로딩 화면을 보여줍니다.
+    return (
+      <div>
+        <Loading />
+      </div>
+    ); // 로딩 중에는 로딩 화면을 보여줍니다.
   }
 
   return (
