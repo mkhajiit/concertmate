@@ -10,6 +10,7 @@ interface IUserResult extends RowDataPacket {
   nickname: string;
   created_at_time: string;
 }
+
 export const addUserModel = async (
   id: string,
   email: string,
