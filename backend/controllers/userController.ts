@@ -50,17 +50,18 @@ export const loginUserController = async (req: Request, res: Response): Promise<
       throw new Error('SECRET_KEY is not defined in the environment variables.');
     }
 
-    const token = jwt.sign({ id: result.user_id }, accessTokenKey, { expiresIn: '30m' });
-    console.log(token);
+    const accessToken = jwt.sign({ id: result.user_id }, accessTokenKey, { expiresIn: '30m' });
+    const refreshToken = jwt.sign({ id: result.user_id }, refreshTokenKey, { expiresIn: '14d' });
+    console.log('엑세스토큰: ', accessToken, '리프래쉬 토큰: ', refreshToken);
 
-    res.cookie('authToken', token, {
+    res.cookie('refreshToken', refreshToken, {
       httpOnly: true, // JavaScript로 쿠키 접근 불가
       secure: false, // HTTPS에서만 전송 (로컬 개발 시 false로 설정)
       sameSite: 'strict', // CSRF 방어
       maxAge: 3600 * 1000, // 1시간
     });
 
-    res.status(200).json({ message: 'Login successful', token });
+    res.status(200).json({ message: 'Login successful', accessToken });
     return; // 명시적으로 흐름 종료 시키기위해 return ; 추가
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });

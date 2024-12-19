@@ -21,9 +21,10 @@ const verifyTokenPromise = (token: string): Promise<JwtPayload | string> => {
   });
 };
 
+// access, refresh 토큰 사용해서 검증하는 방식으로 변경할 것
 export async function verifyTokenController(req: Request, res: Response): Promise<void> {
   try {
-    const token = req.cookies.authToken;
+    const token = req.cookies.accessToken;
     console.log(token);
 
     if (!token) {
