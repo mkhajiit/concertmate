@@ -6,7 +6,8 @@ import dotenv from 'dotenv';
 import { Request, Response } from 'express';
 
 dotenv.config();
-const secretKey = process.env.SECRET_KEY;
+const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
+const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
 // req, res 타입 추후에 바꿀것
 // 회원가입
 export const addUserController = async (req: any, res: any) => {
@@ -45,11 +46,11 @@ export const loginUserController = async (req: Request, res: Response): Promise<
     console.log('존재하는 비밀번호입니다');
 
     // 키가 없을때 처리를 해줘야 에러가 발생 안한다.(타입스크립트)
-    if (!secretKey) {
+    if (!accessTokenKey || !refreshTokenKey) {
       throw new Error('SECRET_KEY is not defined in the environment variables.');
     }
 
-    const token = jwt.sign({ id: result.user_id }, secretKey, { expiresIn: '1h' });
+    const token = jwt.sign({ id: result.user_id }, accessTokenKey, { expiresIn: '30m' });
     console.log(token);
 
     res.cookie('authToken', token, {
