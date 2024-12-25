@@ -1,5 +1,6 @@
 'use client';
 
+import { saveAccessToken } from '@/lib/tokenFunc/tokenFunc';
 import { loginUser } from '../../api/api';
 
 interface ILoginSubmitData {
@@ -8,7 +9,7 @@ interface ILoginSubmitData {
 }
 
 function Login() {
-  const onSubmit = (event: React.FormEvent) => {
+  const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const form = event.target as HTMLFormElement;
@@ -19,7 +20,9 @@ function Login() {
       password: formData.get('password') as string,
     };
 
-    loginUser(data);
+    const token = await loginUser(data);
+
+    saveAccessToken(token);
   };
 
   return (

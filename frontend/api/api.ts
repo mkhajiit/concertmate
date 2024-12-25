@@ -16,7 +16,10 @@ export async function addUser(userData: any) {
 export async function loginUser(loginData: any) {
   // 쿠키 요청
   try {
-    await axios.post(`${apiDomain}/user/login`, loginData, { withCredentials: true });
+    const data = await axios.post(`${apiDomain}/user/login`, loginData, { withCredentials: true });
+    const accessToken = data.data.accessToken;
+    console.log(accessToken);
+    return accessToken;
   } catch (error) {
     console.log(error);
     throw error;
