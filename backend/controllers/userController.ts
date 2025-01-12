@@ -4,9 +4,9 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { Request, Response } from 'express';
+import createAccessToken from '../lib/createAccessToken';
 
 dotenv.config();
-const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
 const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
 // req, res 타입 추후에 바꿀것
 // 회원가입
@@ -46,11 +46,11 @@ export const loginUserController = async (req: Request, res: Response): Promise<
     console.log('존재하는 비밀번호입니다');
 
     // 키가 없을때 처리를 해줘야 에러가 발생 안한다.(타입스크립트)
-    if (!accessTokenKey || !refreshTokenKey) {
+    if (!refreshTokenKey) {
       throw new Error('환경변수에 알맞은 변수가 없습니다.');
     }
 
-    const accessToken = jwt.sign({ id: result.user_id }, accessTokenKey, { expiresIn: '15m' });
+    const accessToken = createAccessToken(result.user_id);
     const refreshToken = jwt.sign({ id: result.user_id }, refreshTokenKey, { expiresIn: '14d' });
     console.log('엑세스토큰: ', accessToken, '리프래쉬 토큰: ', refreshToken);
 

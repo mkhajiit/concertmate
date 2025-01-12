@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import createAccessToken from '../lib/createAccessToken';
 
 dotenv.config();
 const accessTokenKey = process.env.ACCESS_TOKEN_KEY;
@@ -40,9 +41,7 @@ export async function verifyTokenController(req: Request, res: Response): Promis
         // 엑세스 토큰이 만료 되었으면 재발급하고 만료되지 않았으면 유효인증
         jwt.verify(accessToken, accessTokenKey, (err) => {
           if (err) {
-            const accessToken = jwt.sign({ id: userId }, accessTokenKey, {
-              expiresIn: '30m',
-            });
+            const accessToken = createAccessToken(userId);
 
             // 새로운 엑세스 토큰을 클라이언트에 응답으로 전송
             res.status(200).json({
