@@ -47,10 +47,10 @@ export const loginUserController = async (req: Request, res: Response): Promise<
 
     // 키가 없을때 처리를 해줘야 에러가 발생 안한다.(타입스크립트)
     if (!accessTokenKey || !refreshTokenKey) {
-      throw new Error('SECRET_KEY is not defined in the environment variables.');
+      throw new Error('환경변수에 알맞은 변수가 없습니다.');
     }
 
-    const accessToken = jwt.sign({ id: result.user_id }, accessTokenKey, { expiresIn: '30m' });
+    const accessToken = jwt.sign({ id: result.user_id }, accessTokenKey, { expiresIn: '15m' });
     const refreshToken = jwt.sign({ id: result.user_id }, refreshTokenKey, { expiresIn: '14d' });
     console.log('엑세스토큰: ', accessToken, '리프래쉬 토큰: ', refreshToken);
 
@@ -61,10 +61,10 @@ export const loginUserController = async (req: Request, res: Response): Promise<
       maxAge: 3600 * 1000, // 1시간
     });
 
-    res.status(200).json({ message: 'Login successful', accessToken });
+    res.status(200).json({ message: '로그인 성공', accessToken });
     return; // 명시적으로 흐름 종료 시키기위해 return ; 추가
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: '서버에러 발생' });
     return;
   }
 };

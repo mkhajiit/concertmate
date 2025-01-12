@@ -13,7 +13,9 @@ function VerifyUser() {
   useEffect(() => {
     async function checkAuth() {
       try {
-        const result = await verifyToken(); // 인증 확인
+        const accessToken = localStorage.getItem('accessToken');
+        const result = await verifyToken(accessToken); // 인증 확인
+        console.log(result);
         if (result.status !== 200) {
           router.push('/auth/login'); // 인증 실패 시 로그인 페이지로 리다이렉트
         } else {

@@ -29,3 +29,4 @@ export const loginUserModel = async (email: string) => {
   const result = results[0];
   return result;
 };
+

@@ -27,9 +27,16 @@ export async function loginUser(loginData: any) {
 }
 
 // 토큰 인증 앤드 포인트
-export async function verifyToken() {
+export async function verifyToken(accessToken: string | null) {
   try {
-    const result = await axios.get(`${apiDomain}/feature/verify`, { withCredentials: true });
+    // 토큰이 없어서 null인 경우
+    if (!accessToken) {
+      throw new Error('Access token is missing');
+    }
+    const result = await axios.get(`${apiDomain}/feature/verify`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+      withCredentials: true,
+    });
     return result;
   } catch (error) {
     console.log(error);
