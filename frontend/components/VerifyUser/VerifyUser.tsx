@@ -6,9 +6,10 @@ import { useRouter } from 'next/navigation';
 import { verifyToken } from '@/api/api';
 import Loading from '../Loading/Loading';
 
-function VerifyUser() {
+function VerifyUser({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true); // 로딩 상태를 관리합니다.
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     async function checkAuth() {
@@ -19,10 +20,12 @@ function VerifyUser() {
         if (result.status !== 200) {
           router.push('/auth/login'); // 인증 실패 시 로그인 페이지로 리다이렉트
         } else {
-          setLoading(false); // 인증 성공 시 로딩 상태 변경
+          setIsAuthenticated(true); // 인증 성공 시 인증 상태 변경
         }
       } catch (error) {
         router.push('/auth/login'); // 예외 발생 시 로그인 페이지로 리다이렉트
+      } finally {
+        setLoading(false); // 로딩 상태 해제
       }
     }
 
@@ -37,11 +40,11 @@ function VerifyUser() {
     ); // 로딩 중에는 로딩 화면을 보여줍니다.
   }
 
-  return (
-    <div>
-      <h1>유저정보페이지</h1>
-    </div>
-  );
+  if (!isAuthenticated) {
+    return null; // 인증되지 않은 경우 아무것도 렌더링하지 않음
+  }
+
+  return <>{children}</>;
 }
 
 export default VerifyUser;
