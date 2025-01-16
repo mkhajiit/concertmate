@@ -5,11 +5,12 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { verifyToken } from '@/api/api';
 import Loading from '../Loading/Loading';
+import { useAuthStateStore } from '@/zustand/AuthStateStore';
 
 function VerifyUser({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true); // 로딩 상태를 관리합니다.
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated, setAuthenticateState } = useAuthStateStore();
 
   useEffect(() => {
     async function checkAuth() {
@@ -18,9 +19,10 @@ function VerifyUser({ children }: { children: React.ReactNode }) {
         const result = await verifyToken(accessToken); // 인증 확인
         console.log(result);
         if (result.status !== 200) {
+          setAuthenticateState(false);
           router.push('/auth/login'); // 인증 실패 시 로그인 페이지로 리다이렉트
         } else {
-          setIsAuthenticated(true); // 인증 성공 시 인증 상태 변경
+          setAuthenticateState(true); // 인증 성공 시 인증 상태 변경
         }
       } catch (error) {
         router.push('/auth/login'); // 예외 발생 시 로그인 페이지로 리다이렉트

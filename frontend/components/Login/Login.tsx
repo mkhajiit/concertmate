@@ -2,6 +2,7 @@
 
 import { saveAccessToken } from '@/lib/tokenFunc/tokenFunc';
 import { loginUser } from '../../api/api';
+import { useAuthStateStore } from '@/zustand/AuthStateStore';
 
 interface ILoginSubmitData {
   email: string;
@@ -9,6 +10,7 @@ interface ILoginSubmitData {
 }
 
 function Login() {
+  const { isAuthenticated, setAuthenticateState } = useAuthStateStore();
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -20,9 +22,15 @@ function Login() {
       password: formData.get('password') as string,
     };
 
-    const token = await loginUser(data);
+    try {
+      const token = await loginUser(data);
 
-    saveAccessToken(token);
+      saveAccessToken(token);
+      setAuthenticateState(true);
+    } catch (error) {
+      console.error('통신실패: ', error);
+      setAuthenticateState(false);
+    }
   };
 
   return (
@@ -38,6 +46,8 @@ function Login() {
           <input type='password' name='password' required />
         </p>
         <button type='submit'>로그인</button>
+        {/* 로그인 상태 확인하기 위한 임시 코드 나중에 삭제 할것! */}
+        <h1>{String(isAuthenticated)}</h1>
       </form>
     </div>
   );
