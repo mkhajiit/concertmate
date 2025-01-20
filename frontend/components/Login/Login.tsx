@@ -3,6 +3,7 @@
 import { saveAccessToken } from '@/lib/tokenFunc/tokenFunc';
 import { loginUser } from '../../api/api';
 import { useAuthStateStore } from '@/zustand/AuthStateStore';
+import VerifyUser from '../VerifyUser/VerifyUser';
 
 interface ILoginSubmitData {
   email: string;
@@ -53,4 +54,12 @@ function Login() {
   );
 }
 
-export default Login;
+function ProtectedLoginPage() {
+  return (
+    <VerifyUser>
+      <Login />
+    </VerifyUser>
+  );
+}
+
+export default ProtectedLoginPage;
