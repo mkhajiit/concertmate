@@ -2,6 +2,9 @@
 
 import { useForm } from 'react-hook-form';
 import { addUser } from '../../api/api';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { useAuthStateStore } from '@/zustand/AuthStateStore';
 
 export interface IInput {
   email: string;
@@ -11,6 +14,15 @@ export interface IInput {
 }
 // 주의!! react-hook-form 도 client 사이드에서만 사용가능함
 function SignUp() {
+  const router = useRouter();
+  const isAuthenticated = useAuthStateStore((state) => state.isAuthenticated);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/'); // 이미 로그인 상태면 홈페이지로 보낸다.
+    }
+  }, []);
+
   const {
     register,
     handleSubmit,

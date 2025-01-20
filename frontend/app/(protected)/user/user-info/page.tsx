@@ -8,12 +8,4 @@ function UserInfoPage() {
   );
 }
 
-function ProtectedPage() {
-  return (
-    <VerifyUser>
-      <UserInfoPage />
-    </VerifyUser>
-  );
-}
-
-export default ProtectedPage;
+export default UserInfoPage;

@@ -3,7 +3,8 @@
 import { saveAccessToken } from '@/lib/tokenFunc/tokenFunc';
 import { loginUser } from '../../api/api';
 import { useAuthStateStore } from '@/zustand/AuthStateStore';
-import VerifyUser from '../VerifyUser/VerifyUser';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface ILoginSubmitData {
   email: string;
@@ -12,6 +13,14 @@ interface ILoginSubmitData {
 
 function Login() {
   const { isAuthenticated, setAuthenticateState } = useAuthStateStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/'); // 이미 로그인 상태면 홈페이지로 보낸다.
+    }
+  }, []);
+
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -52,12 +61,4 @@ function Login() {
   );
 }
 
-function ProtectedLoginPage() {
-  return (
-    <VerifyUser>
-      <Login />
-    </VerifyUser>
-  );
-}
-
-export default ProtectedLoginPage;
+export default Login;
