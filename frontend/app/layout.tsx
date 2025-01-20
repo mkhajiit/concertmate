@@ -1,4 +1,5 @@
 import MainHeader from '@/components/MainHeader/MainHeader';
+import VerifyUser from '@/components/VerifyUser/VerifyUser';
 
 export const metadata = {
   title: '콘서트메이트',
@@ -9,8 +10,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html>
       <body>
-        <MainHeader />
-        {children}
+        <VerifyUser shouldRedirect={false}>
+          <MainHeader />
+          {children}
+        </VerifyUser>
       </body>
     </html>
   );

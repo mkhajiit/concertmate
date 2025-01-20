@@ -47,8 +47,6 @@ function Login() {
           <input type='password' name='password' required />
         </p>
         <button type='submit'>로그인</button>
-        {/* 로그인 상태 확인하기 위한 임시 코드 나중에 삭제 할것! */}
-        <h1>{String(isAuthenticated)}</h1>
       </form>
     </div>
   );

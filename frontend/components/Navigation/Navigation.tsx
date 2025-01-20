@@ -24,9 +24,14 @@ function Navigation() {
             </li>
           </>
         ) : (
-          <li>
-            <Link href='/protected/user/user-info'>회원정보</Link>
-          </li>
+          <>
+            <li>
+              <Link href='/user/user-info'>회원정보</Link>
+            </li>
+            <li>
+              <button>로그아웃</button>
+            </li>
+          </>
         )}
         <li>
           <b>{`로그인상태: ${String(isAuthenticated)}`}</b>
