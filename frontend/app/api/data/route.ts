@@ -13,6 +13,7 @@ export async function GET() {
     const data = await xml2js.parseStringPromise(textData);
 
     const dbData = data?.dbs?.db || []; // 데이터가 없으면 빈 배열을 반환
+    console.log(dbData);
     return NextResponse.json(dbData);
   } catch (error) {
     console.log('Error from Fetching Data: ', error);

@@ -33,6 +33,7 @@ function VerifyUser({ children, shouldRedirect }: VerifyUserProps) {
         }
       } catch (error) {
         router.push('/auth/login'); // 예외 발생 시 로그인 페이지로 리다이렉트
+        // application localstorage에서 임의로 토큰을 삭제한 경우도 해당
       } finally {
         setLoading(false); // 로딩 상태 해제
       }
